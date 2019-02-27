@@ -16,5 +16,5 @@ for i in generator_function(1000, 5):
 
 #for i in list2:
 #    print(i)
-print(list1[0], list1[1], list2[0], list2[1])
+print(list1[:2], list2[:2])
 print(sys.getsizeof(list1), sys.getsizeof(generator_function))
