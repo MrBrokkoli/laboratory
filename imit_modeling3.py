@@ -12,7 +12,7 @@ def f(x) :
     l = 10
     k = 5
     return (k / l) * (x / l)**(k - 1) * np.exp(-(x / l)**k)
-
+#l*numpy.random.weibull
 array_v = list()
 a = 0
 b = 10
