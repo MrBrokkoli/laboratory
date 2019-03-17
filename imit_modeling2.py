@@ -7,8 +7,8 @@ import scipy.stats as st
 import math
 
 K = 1489       # макс страх выплата
-N = 500    # число клиентов
-V = 500000    # резерв компании
+N = 500        # число клиентов
+V = 500000     # резерв компании
 A = 1 / integrate.quad(lambda x: (x ** 3)*(K-x), 0, K)[0]
 
 a = 0
@@ -40,11 +40,11 @@ def devastation() :
     #else:
     #    return 0
 
-array_b = list()
-array_p = list()
-array_d = list()
-array_mean = list()
-O = 1000
+array_b = list()      # массив сумм выплат для каждого испытания
+array_p = list()      # массив исходов (1 - не разорились, 0 - разорились)
+array_d = list()      # массив дисперсий
+array_mean = list()   # массив средних одиночный выплат для каждого испытания
+O = 1000 # число испытаний
 for i in range(O):
     arr_v = devastation()
     #Сумма выплат
@@ -59,14 +59,13 @@ for i in range(O):
         array_p.append(0)
         
 
-mean = np.mean(array_mean)
-prob = sum(array_p) / len(array_p)
-disp = math.sqrt(np.var(array_mean))
-#print(array_b)
-#print(array_p)
-print(1 - prob)
-print(disp)
-print(mean)
+mean = np.mean(array_mean)            # средняя выплата для всех испытаний
+prob = sum(array_p) / len(array_p)    # эмпирическая вероятность не разориться
+disp = math.sqrt(np.var(array_mean))  # общая дисперсия для испытаний
+
+print(disp, "\t- дисперсия")
+print(mean, "\t- средняя выплата для 1 человека")
+print(1 - prob, "\t\t\t- эмпирическая вероятность разориться")
 #print(sum(array_b))
 #plot = plt.hist(array_v, bins = 50)
 
@@ -75,6 +74,7 @@ print(mean)
 #print("Мы выплатили: ", sum_v)
 #print("Разница:", V - sum_v)
 
-integrate.quad(lambda x: st.norm.pdf(x, mean, np.std(array_mean)), V / N, np.inf)[0]
-
-plt.hist(array_mean)
+# вероятность разорения по ЦПТ
+theory_p = integrate.quad(lambda x: st.norm.pdf(x, mean, np.std(array_mean)), V / N, np.inf)[0]
+print(theory_p, "\t- вероятность разорения по ЦПТ")
+hist = plt.hist(array_mean)
