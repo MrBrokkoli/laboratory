@@ -22,8 +22,8 @@ print(C)
 m = 3         # размерность матрицы ковариаций
 n = 10000     # длина вектора
 Y = [np.random.normal(0, 1, n) for i in range(m)]  # m векторовов размерности n с нормальным расределением
-Z = np.matmul(C, Y) 
-Z = list(map(add, Z, mu)) 
+Z = np.matmul(C, Y) #умножаем матрицы
+Z = list(map(add, Z, mu)) #добавляем отклонение
 #print(Z) 
 evaluation = np.cov(Z) # оценка матрицы ковариаций 
 print(evaluation)
@@ -31,6 +31,7 @@ i = 1
 j = 2 
 np.corrcoef(Z[i - 1], Z[j - 1])[1, 0] # проверка гипотезы равенства 
 
+#https://en.wikipedia.org/wiki/Fisher_transformation
 r = np.corrcoef(Z[i], Z[j])[1,0] # эмпирический коэффицент корреляции
 print("r =", r)
 p = G[i][j] / math.sqrt(G[i][i]*G[j][j])
