@@ -62,7 +62,7 @@ while len(array) < n:
 density_arr, probability_arr = create_interval(array, r)
 print("Статистика Хи квадрат: ", stat(density_arr, probability_arr, n))
 
-if stat(density_arr, probability_arr, n) - n < scipy.stats.chi2.isf(0.1, r-1): 
+if stat(density_arr, probability_arr, n) < scipy.stats.chi2.isf(0.1, r-1): 
     print("Попали в доверительный интервал, уровень значимости 0.1 (<", scipy.stats.chi2.isf(0.1, r-1), ")") 
 else: 
     print("Не попали в доверительный интервал")
@@ -70,4 +70,4 @@ else:
 r = np.arange(0, 2 * math.pi, 0.1)
 
 array_sorted = sorted(array)
-plot = plt.plot(array_sorted, density(array_sorted), color = 'red', linewidth = 3)
+#plot = plt.plot(array_sorted, density(array_sorted), color = 'red', linewidth = 3)
