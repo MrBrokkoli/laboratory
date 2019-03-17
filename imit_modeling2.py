@@ -78,3 +78,16 @@ print(1 - prob, "\t\t\t- эмпирическая вероятность раз�
 theory_p = integrate.quad(lambda x: st.norm.pdf(x, mean, np.std(array_mean)), V / N, np.inf)[0]
 print(theory_p, "\t- вероятность разорения по ЦПТ")
 hist = plt.hist(array_mean)
+
+#https://math.semestr.ru/math/expectation-continuous.php
+A = 1 / integrate.quad(lambda x: x ** 3 * (K - x), 0, K)[0]
+mean = integrate.quad(lambda x: x * f(x), 0, K)[0]
+var = integrate.quad(lambda x: x ** 2 * f(x), 0, K)[0] - mean ** 2
+std = math.sqrt(var)
+#print(mean)
+#print(std)
+#1 - st.norm.cdf(V / N, mean, std)
+#1 - integrate.quad(lambda x: density((V - N * mean) / (std * math.sqrt(N)), K))[0]
+X = (V - N * mean) / (std * math.sqrt(N))
+#print(X)
+print(1 - st.norm.cdf(X, 0, 1))
